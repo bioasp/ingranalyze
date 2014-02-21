@@ -1,0 +1,3 @@
+include src/encodings/*.lp
+include src/encodings/*.gringo
+include *.txt

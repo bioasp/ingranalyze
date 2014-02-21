@@ -1,0 +1,24 @@
+Installation
+============
+
+
+You can install ingranalyze by running::
+
+	$ pip install ingranalyze
+
+
+Usage
+=====
+
+Typical usage is::
+	
+	$ ingranalyze.py network.net observation.obs
+
+Samples
+=======
+
+Sample files for yeast are available here:
+	yeast_guelzim.net_ yeast_snf2.obs_
+
+.. _yeast_guelzim.net: http://www.cs.uni-potsdam.de/~sthiele/bioasp/downloads/samples/yeastdata/yeast_guelzim.net
+.. _yeast_snf2.obs: http://www.cs.uni-potsdam.de/~sthiele/bioasp/downloads/samples/yeastdata/yeast_snf2.obs
