@@ -92,7 +92,7 @@ def get_minimal_inconsistent_cores(instance,nmodels=0,exclude=[]):
     inputs = get_reductions(instance)
     prg = [ dyn_mic_prg, inputs.to_file(), instance.to_file(), exclude_sol(exclude) ] 
     options='--heuristic=Vmtf'
-    solver = GringoClaspD(clasp_options=options)
+    solver = GringoClasp(clasp_options=options)
     models = solver.run(prg,nmodels=0,collapseTerms=True, collapseAtoms=False)
     os.unlink(prg[1])
     os.unlink(prg[2])
@@ -182,7 +182,7 @@ def get_minimal_repair_sets(instance, repair_options ,optimum,nmodels=0,exclude=
     instance2 = instance.union(inputs)
     prg = [ instance2.to_file(), repair_options.to_file(), exclude_sol(exclude), repair_core_prg, repair_cardinality_prg ]
 
-    options='--project --opt-all='+str(optimum)
+    options='--project --opt-mode=optN'
     solver = GringoClasp(clasp_options=options)
     models = solver.run(prg,nmodels=0, collapseTerms=True, collapseAtoms=False)
     os.unlink(prg[0])
@@ -202,7 +202,7 @@ def get_predictions_under_minimal_repair(instance, repair_options, optimum):
     
     prg = [ instance2.to_file(), repair_options.to_file(), prediction_core_prg, repair_cardinality_prg ]
 
-    options='--project --enum-mode cautious --opt-all='+str(optimum)
+    options='--project --enum-mode cautious --opt-mode=optN'
     solver = GringoClasp(clasp_options=options)
     models = solver.run(prg,nmodels=0,collapseTerms=True, collapseAtoms=False)
     os.unlink(prg[0])
