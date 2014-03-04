@@ -169,8 +169,9 @@ def get_minimum_of_repairs(instance,repair_options,exclude=[]):
     instance2 = instance.union(inputs)
     prg = [ instance2.to_file(),repair_options.to_file(), exclude_sol(exclude), repair_core_prg, repair_cardinality_prg ]
 
-    solver = GringoClaspOpt()
-    optimum = solver.run(prg)
+    solver = GringoClasp()
+    optimum = solver.run(prg,nmodels=0)
+    print optimum
     os.unlink(prg[0])
     os.unlink(prg[1])
     os.unlink(prg[2]) 
