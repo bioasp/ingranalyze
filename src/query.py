@@ -171,7 +171,6 @@ def get_minimum_of_repairs(instance,repair_options,exclude=[]):
 
     solver = GringoClasp()
     optimum = solver.run(prg,nmodels=0)
-    print optimum
     os.unlink(prg[0])
     os.unlink(prg[1])
     os.unlink(prg[2]) 
