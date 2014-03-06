@@ -33,7 +33,7 @@ class install(_install):
                          
 setup(cmdclass={'install': install},
       name='ingranalyze',
-      version='1.5',
+      version='1.5.1',
       url='http://pypi.python.org/pypi/ingranalyze/',
       license='GPLv3+',
       description='Influence graph analysis, consistency check, diagnosis, repair and prediction ',
@@ -45,6 +45,6 @@ setup(cmdclass={'install': install},
       package_data = {'__ingranalyze__' : ['encodings/*.lp','encodings/*.gringo']},
       scripts = ['ingranalyze.py'],
       install_requires=[
-        "pyasp == 1.3"
+        "pyasp == 1.3.1"
       ]
 )

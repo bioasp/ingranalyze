@@ -55,8 +55,9 @@ def get_consistent_labelings(instance,nmodels=0,exclude=[]):
     '''
     inputs = get_reductions(instance)
     prg = [ consistency_prg, inputs.to_file(), instance.to_file(), exclude_sol(exclude) ]
-    solver = GringoClasp()
-    models = solver.run(prg,nmodels)
+    co= str(nmodels)
+    solver = GringoClasp(clasp_options=co)
+    models = solver.run(prg)
     os.unlink(prg[1])
     os.unlink(prg[2])
     os.unlink(prg[3])
@@ -91,9 +92,9 @@ def get_minimal_inconsistent_cores(instance,nmodels=0,exclude=[]):
     '''
     inputs = get_reductions(instance)
     prg = [ dyn_mic_prg, inputs.to_file(), instance.to_file(), exclude_sol(exclude) ] 
-    options='--heuristic=Vmtf'
+    options='--heuristic=Vmtf '+str(nmodels)
     solver = GringoClasp(clasp_options=options)
-    models = solver.run(prg,nmodels=0,collapseTerms=True, collapseAtoms=False)
+    models = solver.run(prg, collapseTerms=True, collapseAtoms=False)
     os.unlink(prg[1])
     os.unlink(prg[2])
     os.unlink(prg[3])
@@ -102,7 +103,7 @@ def get_minimal_inconsistent_cores(instance,nmodels=0,exclude=[]):
 def guess_inputs(instance):
     prg = [ guess_inputs_prg, instance.to_file() ]
     solver = GringoClasp()
-    models = solver.run(prg,0, collapseTerms=True, collapseAtoms=False)
+    models = solver.run(prg, collapseTerms=True, collapseAtoms=False)
     os.unlink(prg[1])
     assert(len(models) == 1)
     return models[0]
@@ -110,7 +111,7 @@ def guess_inputs(instance):
 def get_reductions(instance):
     prg = [ reduction_prg, instance.to_file() ]
     solver = GringoClasp()
-    models = solver.run(prg,0)
+    models = solver.run(prg)
     os.unlink(prg[1])
     assert(len(models) == 1)
     return models[0]
@@ -150,7 +151,7 @@ def get_repair_options_make_obs_input(instance):
     instance2 = instance.union(repair_mode)
     prg = [ instance2.to_file(), repair_options_prg ]
     solver = GringoClasp()
-    models = solver.run(prg,1)
+    models = solver.run(prg)
     os.unlink(prg[0])    
     return models[0]
     
@@ -170,7 +171,7 @@ def get_minimum_of_repairs(instance,repair_options,exclude=[]):
     prg = [ instance2.to_file(),repair_options.to_file(), exclude_sol(exclude), repair_core_prg, repair_cardinality_prg ]
 
     solver = GringoClasp()
-    optimum = solver.run(prg,nmodels=0)
+    optimum = solver.run(prg)
     os.unlink(prg[0])
     os.unlink(prg[1])
     os.unlink(prg[2]) 
@@ -182,9 +183,9 @@ def get_minimal_repair_sets(instance, repair_options ,optimum,nmodels=0,exclude=
     instance2 = instance.union(inputs)
     prg = [ instance2.to_file(), repair_options.to_file(), exclude_sol(exclude), repair_core_prg, repair_cardinality_prg ]
 
-    options='--project --opt-mode=optN'
+    options='--project --opt-mode=optN '+str(nmodels)
     solver = GringoClasp(clasp_options=options)
-    models = solver.run(prg,nmodels=0, collapseTerms=True, collapseAtoms=False)
+    models = solver.run(prg, collapseTerms=True, collapseAtoms=False)
     os.unlink(prg[0])
     os.unlink(prg[1])
     os.unlink(prg[2])
@@ -202,9 +203,9 @@ def get_predictions_under_minimal_repair(instance, repair_options, optimum):
     
     prg = [ instance2.to_file(), repair_options.to_file(), prediction_core_prg, repair_cardinality_prg ]
 
-    options='--project --enum-mode cautious --opt-mode=optN'
+    options='--project --enum-mode cautious --opt-mode=optN --opt-bound='+str(optimum)
     solver = GringoClasp(clasp_options=options)
-    models = solver.run(prg,nmodels=0,collapseTerms=True, collapseAtoms=False)
+    models = solver.run(prg, collapseTerms=True, collapseAtoms=False)
     os.unlink(prg[0])
     os.unlink(prg[1])
     return whatsnew(instance,models[0])
@@ -242,7 +243,7 @@ def get_predictions_under_consistency(instance):
 
     prg = [ prediction_prg, inputs.to_file(), instance.to_file(), exclude_sol([]) ]
     solver = GringoClasp(clasp_options='--project --enum-mode cautious')
-    models = solver.run(prg,0,collapseTerms=True, collapseAtoms=False)
+    models = solver.run(prg, collapseTerms=True, collapseAtoms=False)
     os.unlink(prg[1])
     os.unlink(prg[2])
     os.unlink(prg[3])
