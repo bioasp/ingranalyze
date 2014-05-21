@@ -45,6 +45,6 @@ setup(cmdclass={'install': install},
       package_data = {'__ingranalyze__' : ['encodings/*.lp','encodings/*.gringo']},
       scripts = ['ingranalyze.py'],
       install_requires=[
-        "pyasp == 1.3.1"
+        "pyasp == 1.3.3"
       ]
 )
