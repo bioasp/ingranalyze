@@ -1,7 +1,6 @@
 Installation
 ============
 
-
 You can install ingranalyze by running::
 
 	$ pip install ingranalyze
@@ -18,11 +17,11 @@ For more options you can ask for help as follows:
 
 	$ ingranalyze.py -h 
 	usage: ingranalyze.py [-h] [--mics] [--repair {1,2,3,4,5}] [--list_repairs] networkfile observationfile                                                          
-	
+
 	positional arguments:                                                                                      
 	  networkfile           influence graph in bioquali format                                                 
 	  observationfile       observations in bioquali format                                                    
-	
+
 	optional arguments:                                                                                        
 	  -h, --help            show this help message and exit                                                    
 	  --mics                compute minimal inconsistent cores
@@ -38,7 +37,7 @@ Samples
 =======
 
 Sample files for yeast are available here:
-	yeast_guelzim.net_ yeast_snf2.obs_
+      yeast_guelzim.net_ yeast_snf2.obs_
 
 .. _yeast_guelzim.net: http://bioasp.github.io/downloads/samples/yeastdata/yeast_guelzim.net
 .. _yeast_snf2.obs: http://bioasp.github.io/downloads/samples/yeastdata/yeast_snf2.obs
