@@ -17,11 +17,11 @@ For more options you can ask for help as follows:
 
 	$ ingranalyze.py -h 
 	usage: ingranalyze.py [-h] [--mics] [--repair {1,2,3,4,5}] [--list_repairs] networkfile observationfile                                                          
-
+  
 	positional arguments:                                                                                      
 	  networkfile           influence graph in bioquali format                                                 
 	  observationfile       observations in bioquali format                                                    
-
+  
 	optional arguments:                                                                                        
 	  -h, --help            show this help message and exit                                                    
 	  --mics                compute minimal inconsistent cores
