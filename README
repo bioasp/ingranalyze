@@ -3,7 +3,9 @@ Installation
 
 You can install ingranalyze by running::
 
-	$ pip install ingranalyze
+	$ pip install --user ingranalyze
+
+The executable scripts can then be found in ~/.local/bin.
 
 
 Usage
@@ -13,7 +15,7 @@ Typical usage is::
 
 	$ ingranalyze.py --mics --repair 5 networkfile observationfile
 
-For more options you can ask for help as follows:
+For more options you can ask for help as follows::
 
 	$ ingranalyze.py -h 
 	usage: ingranalyze.py [-h] [--mics] [--repair {1,2,3,4,5}] [--list_repairs] networkfile observationfile                                                          
@@ -36,7 +38,7 @@ For more options you can ask for help as follows:
 Samples
 =======
 
-Sample files for yeast are available here:
+Sample files for yeast are available here::
       yeast_guelzim.net_ yeast_snf2.obs_
 
 .. _yeast_guelzim.net: http://bioasp.github.io/downloads/samples/yeastdata/yeast_guelzim.net
