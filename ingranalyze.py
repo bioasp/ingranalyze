@@ -199,7 +199,6 @@ if __name__ == '__main__':
 	  repair_options = query.get_repair_options_add_edges(net_with_data)
 	  print 'done.'
       
-
 	print '\nCompute minimal numbers of necessary repair operations ...',
 	optimum = query.get_minimum_of_repairs(net_with_data, repair_options)
 	print 'done.'

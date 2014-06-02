@@ -1,3 +1,7 @@
+1.5.3
+----------------
+fixed bug, caused by reduction applied to other other reasoning modes than minimal inconsitent cores
+
 1.5.2
 ----------------
 use pyasp-1.3.3

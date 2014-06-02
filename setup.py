@@ -33,7 +33,7 @@ class install(_install):
                          
 setup(cmdclass={'install': install},
       name='ingranalyze',
-      version='1.5.2',
+      version='1.5.3',
       url='http://pypi.python.org/pypi/ingranalyze/',
       license='GPLv3+',
       description='Influence graph analysis, consistency check, diagnosis, repair and prediction.',
