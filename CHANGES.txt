@@ -1,6 +1,6 @@
 1.5.3
 ----------------
-fixed bug, caused by reduction applied to other other reasoning modes than minimal inconsitent cores
+fixed bug, caused by reduction applied to other reasoning modes than minimal inconsistent cores
 
 1.5.2
 ----------------
