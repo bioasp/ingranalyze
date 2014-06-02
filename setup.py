@@ -34,7 +34,7 @@ class install(_install):
 setup(cmdclass={'install': install},
       name='ingranalyze',
       version='1.5.3',
-      url='http://pypi.python.org/pypi/ingranalyze/',
+      url='http://bioasp.github.io/ingranalyze/',
       license='GPLv3+',
       description='Influence graph analysis, consistency check, diagnosis, repair and prediction.',
       long_description=open('README').read(),
