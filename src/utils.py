@@ -69,7 +69,9 @@ def clean_up() :
   if os.path.isfile("asp_py_parsetab.py"): os.remove("asp_py_parsetab.py")
   if os.path.isfile("asp_py_parsetab.pyc"): os.remove("asp_py_parsetab.pyc") 
   if os.path.isfile("graph_parser_lextab.py"): os.remove("graph_parser_lextab.py")
+  if os.path.isfile("graph_parser_lextab.pyc"): os.remove("graph_parser_lextab.pyc")  
   if os.path.isfile("graph_parser_parsetab.py"): os.remove("graph_parser_parsetab.py")
+  if os.path.isfile("graph_parser_parsetab.pyc"): os.remove("graph_parser_parsetab.pyc")
 
 def m_quit() :  
   clean_up()
