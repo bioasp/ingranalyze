@@ -1,4 +1,4 @@
-# Copyright (c) 2012, Sven Thiele <sthiele78@gmail.com>
+# Copyright (c) 2014, Sven Thiele <sthiele78@gmail.com>
 #
 # This file is part of ingranalyze.
 #
@@ -26,14 +26,14 @@ def print_predictions(predictions) :
     for p in predictions:
         if p.pred() == "vlabel" :
            if exp!=str(p.arg(0)) :
-              print 'Experiment '+str(p.arg(0))+':'
+              print('Experiment ',str(p.arg(0)),':',sep='')
               exp=str(p.arg(0))
            if p.arg(2)== "-1": print('   '+str(p.arg(1))+ ' = - ')
            if p.arg(2)== "1" : print('   '+str(p.arg(1))+ ' = + ')
            if p.arg(2)== "0" : print('   '+str(p.arg(1))+ ' = nc ')
         if p.pred() == "elabel" :
-           if p.arg(2) == "-1" : print '   '+str(p.arg(0))+' -> '+str(p.arg(1))+' -'
-           if p.arg(2) == "1"  : print '   '+str(p.arg(0))+' -> '+str(p.arg(1))+' +'
+           if p.arg(2) == "-1" : print('  ',str(p.arg(0)),'->',str(p.arg(1)),'-')
+           if p.arg(2) == "1"  : print('  ',str(p.arg(0)),'->',str(p.arg(1)),'+')
                   
 def print_mic(mic, net, obs):
   
@@ -44,22 +44,22 @@ def print_mic(mic, net, obs):
     predecessors = []
     for e in net:
        if e.pred() == "obs_elabel" :
-          #print str(e)
-          #print str(e.arg(0)),str(e.arg(1)),str(e.arg(2))
+          #print(str(e)
+          #print(str(e.arg(0)),str(e.arg(1)),str(e.arg(2))
           if str(e.arg(1)) in nodes : 
             predecessors.append(str(e.arg(0)))
             if str(e.arg(2)) == "1" : edges.append( str(e.arg(0))+ " -> " + str(e.arg(1))+ " +")
             if str(e.arg(2)) == "-1" : edges.append(str(e.arg(0))+ " -> " + str(e.arg(1))+ " -")
          #TODO ? edges
-    for edge in edges: print('   '+edge)
+    for edge in edges: print('  ',edge)
     for o in obs:
        if o.pred() == "obs_vlabel" :  
           if str(o.arg(1)) in nodes :
-              if str(o.arg(2))=="1" :  print '   '+str(o.arg(1))+ " = +"
-              if str(o.arg(2))=="-1" :  print '   '+str(o.arg(1))+ " = -"
+              if str(o.arg(2))=="1" :  print('  ',str(o.arg(1)), "= +")
+              if str(o.arg(2))=="-1" :  print('  ',str(o.arg(1)), "= -")
           if str(o.arg(1)) in predecessors :
-              if str(o.arg(2))=="1" :  print '   '+str(o.arg(1))+ " = +"
-              if str(o.arg(2))=="-1" :  print '   '+str(o.arg(1))+ " = -"
+              if str(o.arg(2))=="1" :  print('  ',str(o.arg(1)), "= +")
+              if str(o.arg(2))=="-1" :  print('  ',str(o.arg(1)), "= -")
     
 
 def clean_up() :

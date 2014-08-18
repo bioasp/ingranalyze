@@ -1,4 +1,4 @@
-# Copyright (c) 2012, Sven Thiele <sthiele78@gmail.com>
+# Copyright (c) 2014, Sven Thiele <sthiele78@gmail.com>
 #
 # This file is part of ingranalyze.
 #
@@ -22,9 +22,9 @@ from pyasp.misc import *
 import pyasp.ply.lex as lex
 import pyasp.ply.yacc as yacc
 
-import graph_parser
-import sif_parser
-import profile_parser
+import __ingranalyze__.graph_parser as graph_parser
+import __ingranalyze__.sif_parser as sif_parser
+import __ingranalyze__.profile_parser as profile_parser
 
 
 def int_of_sign(s):
@@ -32,16 +32,16 @@ def int_of_sign(s):
     elif s == '-': return '-1'
     elif s == '0': return '0'
     elif s == 'nc': return '0'
-    else: 
-        print s
+    else:
+        print(s)
         assert(False)
 
 def sign_of_int(s):
     if s == '1': return '+'
     elif s == '-1': return '-'
     elif s == '0': return '0'
-    else: 
-        print s
+    else:
+        print(s)
         assert(False)
 
 
@@ -49,7 +49,7 @@ def sign_of_int(s):
 GENE_ID = '[-a-zA-Z0-9_:&\(\)/]+'
 
 #tokens = ( 'COMPLEX', 'INFL', 'SIGN', 'GENE',)
-#t_GENE = r'[a-zA-Z_][a-zA-Z0-9_]*' 
+#t_GENE = r'[a-zA-Z_][a-zA-Z0-9_]*'
 #operator = ['&','|']
 
 def readGraph(filename):
@@ -57,12 +57,12 @@ def readGraph(filename):
     """
     input: string, name of a file containing a Bioquali-like graph description
     output: asp.TermSet, with atoms matching the contents of the input file
-    
+
     Parses a Bioquali-like graph description, and returns
     a TermSet object.
     Written using original Bioquali
     """
-	
+
     accu = TermSet()
     file = open(filename,'r')
     s = file.readline()
@@ -80,12 +80,12 @@ def readSIFGraph(filename):
     """
     input: string, name of a file containing a Bioquali-like graph description
     output: asp.TermSet, with atoms matching the contents of the input file
-    
+
     Parses a Bioquali-like graph description, and returns
     a TermSet object.
     Written using original Bioquali
     """
-	
+
     accu = TermSet()
     file = open(filename,'r')
     s = file.readline()
@@ -117,30 +117,6 @@ def saveGraph(termset,filename):
     file.close()
 
 
-def readProfile_new(filename):
-    p = profile_parser.Parser()
-    """
-    input: string, name of a file containing a Bioquali-like graph description
-    output: asp.TermSet, with atoms matching the contents of the input file
-    
-    Parses a Bioquali-like graph description, and returns
-    a TermSet object.
-    Written using original Bioquali
-    """
-	
-    accu = TermSet()
-    file = open(filename,'r')
-    s = file.readline()
-    while s!="":
-        if s!="\n":
-	    try:
-		accu = p.parse(s)
-	    except EOFError:
-		break
-	s = file.readline()
-
-    return accu
-    
 def readProfile(filename):
     #COMPLEX_ID = '[-a-zA-Z0-9_:\(\)/&]+'
     GENE_ID = '[-a-zA-Z0-9_:\(\)/]+'
@@ -170,7 +146,7 @@ def readProfile(filename):
             vertex = quote(vm.group('genid'))
             accu.add(Term('obs_vlabel',[name, "gen("+vertex+")", int_of_sign(vm.group('sign'))]))
         else:
-            print 'Syntax error line:', line_number,'  '+line 
+            print('Syntax error line:', line_number,' ',line)
         line = file.readline()[:-1]
         line_number+=1
     return accu
@@ -203,14 +179,14 @@ def readProfile_with_nc(filename):
             vertex = quote(vm.group('genid'))
 
             accu.add(Term('obs_vlabel',[name, "gen("+vertex+")", int_of_sign(vm.group('sign'))]))
-            if vm.group('input')!=None : 
-               accu.add(Term('input',[name, "gen("+vertex+")"]))
+            if vm.group('input')!=None :
+              accu.add(Term('input',[name, "gen("+vertex+")"]))
         else:
-            print 'Syntax error line:', line_number,'  '+line 
+            print('Syntax error line:', line_number,' ',line)
         line = file.readline()[:-1]
         line_number+=1
     return accu
-    
+
 def saveProfile(termset,condition,filename):
     file = open(filename, 'w')
     file.write('-*- ' + condition + ' -*-\n')
@@ -221,4 +197,4 @@ def saveProfile(termset,condition,filename):
                 file.write(unquote(i) + ' = ' + sign_of_int(s) + '\n')
     file.close()
 
-                
+
