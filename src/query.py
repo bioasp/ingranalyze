@@ -1,4 +1,4 @@
-# Copyright (c) 2012, Sven Thiele <sthiele78@gmail.com>
+# Copyright (c) 2014, Sven Thiele <sthiele78@gmail.com>
 #
 # This file is part of ingranalyze.
 #
@@ -64,24 +64,6 @@ def get_consistent_labelings(instance,nmodels=0,exclude=[]):
     return models
    
     
-#def get_minimal_inconsistent_cores(instance,nmodels=0,exclude=[]):
-    #'''
-    #[compute_mic(instance,nmodels,exclude)] returns a list containing
-    #[nmodels] TermSet objects representing subset minimal inconsistent cores of the system
-    #described by the TermSet [instance]. The list [exclude] should contain TermSet objects
-    #representing (maybe partial) solutions that are to be avoided. If [nmodels] equals [0]
-    #then the list contain all feasible models.
-    #'''
-    #inputs = get_reductions(instance)
-    #prg = [ mic_prg, inputs.to_file(), instance.to_file(), exclude_sol(exclude) ] 
-    #options=' --heuristic=Vmtf'
-    #solver = GringoClaspD(options)
-    #models = solver.run(prg,nmodels)
-    #os.unlink(prg[1])
-    #os.unlink(prg[2])
-    #os.unlink(prg[3])
-    #return models[0]
-
 def get_minimal_inconsistent_cores(instance,nmodels=0,exclude=[]):
     '''
     [compute_mic(instance,nmodels,exclude)] returns a list containing
@@ -119,7 +101,7 @@ def get_reductions(instance):
 
 def get_repair_options_flip_obs(instance):
     repair_mode = String2TermSet('repair_v')
-    instance2 = instance.union(repair_mode)
+    instance2 = TermSet(instance.union(repair_mode))
     prg = [ instance2.to_file(), repair_options_prg ]
     solver = GringoClasp()
     models = solver.run(prg)
@@ -129,7 +111,7 @@ def get_repair_options_flip_obs(instance):
 
 def get_repair_options_flip_edge(instance):
     repair_mode = String2TermSet('repair_e')
-    instance2 = instance.union(repair_mode)
+    instance2 = TermSet(instance.union(repair_mode))
     prg = [ instance2.to_file(), repair_options_prg ]
     solver = GringoClasp()
     models = solver.run(prg)
@@ -138,7 +120,7 @@ def get_repair_options_flip_edge(instance):
 
 def get_repair_options_make_node_input(instance):
     repair_mode = String2TermSet('repair_g')
-    instance2 = instance.union(repair_mode)
+    instance2 = TermSet(instance.union(repair_mode))
     prg = [ instance2.to_file(), repair_options_prg ]
     solver = GringoClasp()
     models = solver.run(prg)
@@ -148,7 +130,7 @@ def get_repair_options_make_node_input(instance):
       
 def get_repair_options_make_obs_input(instance):
     repair_mode = String2TermSet('repair_i')
-    instance2 = instance.union(repair_mode)
+    instance2 = TermSet(instance.union(repair_mode))
     prg = [ instance2.to_file(), repair_options_prg ]
     solver = GringoClasp()
     models = solver.run(prg)
@@ -157,7 +139,7 @@ def get_repair_options_make_obs_input(instance):
     
 def get_repair_options_add_edges(instance):
     repair_mode = String2TermSet('repair_a')
-    instance2 = instance.union(repair_mode)
+    instance2 = TermSet(instance.union(repair_mode))
     prg = [ instance2.to_file(), repair_options_prg ]
     solver = GringoClasp()
     models = solver.run(prg)
