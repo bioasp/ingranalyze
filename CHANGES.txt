@@ -1,3 +1,6 @@
+1.5.4
+-----
+port to python 3
 1.5.3
 ----------------
 fixed bug, caused by reduction applied to other reasoning modes than minimal inconsistent cores

@@ -24,7 +24,6 @@ import pyasp.ply.yacc as yacc
 
 import __ingranalyze__.graph_parser as graph_parser
 import __ingranalyze__.sif_parser as sif_parser
-import __ingranalyze__.profile_parser as profile_parser
 
 
 def int_of_sign(s):
