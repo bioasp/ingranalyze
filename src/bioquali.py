@@ -99,10 +99,11 @@ def readSIFGraph(filename):
 
 
 def saveGraph(termset,filename):
-    file = open(filename, 'w')
+    file    = open(filename, 'w')
     elabels = termset.filter(lambda t: t.sip('obs_elabel'))
-    edges = termset.filter(lambda t: t.sip('edge'))
-    inputs = termset.filter(lambda t: t.sip('input'))
+    edges   = termset.filter(lambda t: t.sip('edge'))
+    inputs  = termset.filter(lambda t: t.sip('input'))
+
     for t in elabels:
         [ _, j, i, s ] = t.explode()
         file.write(unquote(j) + ' -> ' + unquote(i) + ' ' + sign_of_int(s) + '\n')
@@ -117,19 +118,17 @@ def saveGraph(termset,filename):
 
 
 def readProfile(filename):
-    #COMPLEX_ID = '[-a-zA-Z0-9_:\(\)/&]+'
-    GENE_ID = '[-a-zA-Z0-9_:\(\)/]+'
-    SIGN = '[-+0n]c*'
-    file = open(filename,'r')
-    val_re = '(?P<genid>'+GENE_ID+')( )*=( )*(?P<sign>'+SIGN+')'
-    val = re.compile(val_re)
-    name_re = '(-\*-)( )*(?P<name>\S+)( )*(-\*-)'
-    name = re.compile(name_re)
-    obs_name = None
+    file        = open(filename,'r')
+    GENE_ID     = '[-a-zA-Z0-9_:\(\)/]+'
+    SIGN        = '[-+0n]c*'
+    val_re      = '(?P<genid>'+GENE_ID+')( )*=( )*(?P<sign>'+SIGN+')'
+    val         = re.compile(val_re)
+    name_re     = '(-\*-)( )*(?P<name>\S+)( )*(-\*-)'
+    name        = re.compile(name_re)
+    obs_name    = None
     line_number = 1
-    line = file.readline()[:-1]
-    # the first line may contain the name
-    nm = name.match(line)
+    line        = file.readline()[:-1]
+    nm          = name.match(line) # the first line may contain the name
     if nm:
         name = nm.group('name')
         line = file.readline()[:-1]
@@ -151,18 +150,17 @@ def readProfile(filename):
     return accu
 
 def readProfile_with_nc(filename):
-    #COMPLEX_ID = '[-a-zA-Z0-9_:\(\)/&]+'
-    GENE_ID = '[-a-zA-Z0-9_:\(\)/]+'
-    file = open(filename,'r')
-    val_re = '(?P<genid>'+GENE_ID+')( )*=( )*(?P<sign>[-+0n]c*)( )*(?P<input>\(input\))*'
-    val = re.compile(val_re)
-    name_re = '(-\*-)( )*(?P<name>\S+)( )*(-\*-)'
-    name = re.compile(name_re)
-    obs_name = None
+
+    file        = open(filename,'r')
+    GENE_ID     = '[-a-zA-Z0-9_:\(\)/]+'
+    val_re      = '(?P<genid>'+GENE_ID+')( )*=( )*(?P<sign>[-+0n]c*)( )*(?P<input>\(input\))*'
+    val         = re.compile(val_re)
+    name_re     = '(-\*-)( )*(?P<name>\S+)( )*(-\*-)'
+    name        = re.compile(name_re)
+    obs_name    = None
     line_number = 1
-    line = file.readline()[:-1]
-    # the first line may contain the name
-    nm = name.match(line)
+    line        = file.readline()[:-1]
+    nm          = name.match(line) # the first line may contain the name
     if nm:
         name = nm.group('name')
         line = file.readline()[:-1]

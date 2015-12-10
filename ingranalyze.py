@@ -40,9 +40,7 @@ if __name__ == '__main__':
                         help="compute all minimal repair sets",
                         action="store_true")
 
-    args = parser.parse_args()
-
-
+    args       = parser.parse_args()
     net_string = args.networkfile
     obs_string = args.observationfile
 
@@ -78,14 +76,14 @@ if __name__ == '__main__':
           print('\nComputing minimal inconsistent cores (mic\'s) ...',end='')
           mics = query.get_minimal_inconsistent_cores(empty_net)
           print('done.\n')
-          count = 1
+          count  = 1
           oldmic = 0
           for mic in mics:
               if oldmic != mic:
                 print('mic ',str(count),':',sep='')
                 utils.print_mic(mic.to_list(),net.to_list(),[])
-                count+=1
-                oldmic= mic
+                count += 1
+                oldmic = mic
 
         repair_options= TermSet()
         print('\nCompute repair options ...',end='')
@@ -124,12 +122,12 @@ if __name__ == '__main__':
           models = query.get_minimal_repair_sets(empty_net,repair_options,optimum[0])
           print('done.')
 
-          count = 1
+          count    = 1
           oldmodel = 0
           for model in models:
             if oldmodel != model:
               oldmodel = model
-              repairs = model.to_list()
+              repairs  = model.to_list()
               print('  repair',count,':')
               for r in repairs : print(str(r.arg(0)),end='')
               print(' ')
@@ -166,14 +164,14 @@ if __name__ == '__main__':
           print('\nComputing minimal inconsistent cores (mic\'s) ...',end='')
           mics = query.get_minimal_inconsistent_cores(net_with_data)
           print('done.')
-          count = 1
+          count  = 1
           oldmic = 0
           for mic in mics:
             if oldmic != mic:
               print('mic ',str(count),':',sep='')
               utils.print_mic(mic.to_list(),net.to_list(),mu.to_list())
-              count+=1
-              oldmic= mic
+              count += 1
+              oldmic = mic
 
 
         repair_options= TermSet()
@@ -210,12 +208,12 @@ if __name__ == '__main__':
           print('\nComputing all repair sets with size', optimum.score[0],'...',end='')
           models = query.get_minimal_repair_sets(net_with_data, repair_options, optimum.score[0])
           print("done.")
-          count = 1
+          count    = 1
           oldmodel = 0
           for model in models:
             if oldmodel != model:
               oldmodel = model
-              repairs = model.to_list()
+              repairs  = model.to_list()
               print("  repair",count,':')
               for r in repairs : print(str(r.arg(0)),end='')
               print(' ')

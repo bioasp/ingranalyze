@@ -54,9 +54,9 @@ def get_consistent_labelings(instance,nmodels=0,exclude=[]):
     then the list contain all feasible models.
     '''
     #inputs = get_reductions(instance)
-    inst = instance.to_file()
-    prg = [ consistency_prg, inst, exclude_sol(exclude) ]
-    co= str(nmodels)
+    inst   = instance.to_file()
+    prg    = [ consistency_prg, inst, exclude_sol(exclude) ]
+    co     = str(nmodels)
     solver = GringoClasp(clasp_options=co)
     models = solver.run(prg)
     os.unlink(inst)
@@ -72,18 +72,18 @@ def get_minimal_inconsistent_cores(instance,nmodels=0,exclude=[]):
     representing (maybe partial) solutions that are to be avoided. If [nmodels] equals [0]
     then the list contain all feasible models.
     '''
-    inputs = get_reductions(instance)
-    prg = [ dyn_mic_prg, inputs.to_file(), instance.to_file(), exclude_sol(exclude) ] 
-    options='--heuristic=Vmtf '+str(nmodels)
-    solver = GringoClasp(clasp_options=options)
-    models = solver.run(prg, collapseTerms=True, collapseAtoms=False)
+    inputs  = get_reductions(instance)
+    prg     = [ dyn_mic_prg, inputs.to_file(), instance.to_file(), exclude_sol(exclude) ] 
+    options ='--heuristic=Vmtf '+str(nmodels)
+    solver  = GringoClasp(clasp_options=options)
+    models  = solver.run(prg, collapseTerms=True, collapseAtoms=False)
     os.unlink(prg[1])
     os.unlink(prg[2])
     os.unlink(prg[3])
     return models
 
 def guess_inputs(instance):
-    prg = [ guess_inputs_prg, instance.to_file() ]
+    prg    = [ guess_inputs_prg, instance.to_file() ]
     solver = GringoClasp()
     models = solver.run(prg, collapseTerms=True, collapseAtoms=False)
     os.unlink(prg[1])
@@ -91,7 +91,7 @@ def guess_inputs(instance):
     return models[0]
 
 def get_reductions(instance):
-    prg = [ reduction_prg, instance.to_file() ]
+    prg    = [ reduction_prg, instance.to_file() ]
     solver = GringoClasp()
     models = solver.run(prg)
     os.unlink(prg[1])
@@ -101,48 +101,48 @@ def get_reductions(instance):
 
 def get_repair_options_flip_obs(instance):
     repair_mode = String2TermSet('repair_v')
-    instance2 = TermSet(instance.union(repair_mode))
-    prg = [ instance2.to_file(), repair_options_prg ]
-    solver = GringoClasp()
-    models = solver.run(prg)
+    instance2   = TermSet(instance.union(repair_mode))
+    prg         = [ instance2.to_file(), repair_options_prg ]
+    solver      = GringoClasp()
+    models      = solver.run(prg)
     os.unlink(prg[0])    
     return models[0]
     
 
 def get_repair_options_flip_edge(instance):
     repair_mode = String2TermSet('repair_e')
-    instance2 = TermSet(instance.union(repair_mode))
-    prg = [ instance2.to_file(), repair_options_prg ]
-    solver = GringoClasp()
-    models = solver.run(prg)
+    instance2   = TermSet(instance.union(repair_mode))
+    prg         = [ instance2.to_file(), repair_options_prg ]
+    solver      = GringoClasp()
+    models      = solver.run(prg)
     os.unlink(prg[0])    
     return models[0]
 
 def get_repair_options_make_node_input(instance):
     repair_mode = String2TermSet('repair_g')
-    instance2 = TermSet(instance.union(repair_mode))
-    prg = [ instance2.to_file(), repair_options_prg ]
-    solver = GringoClasp()
-    models = solver.run(prg)
+    instance2   = TermSet(instance.union(repair_mode))
+    prg         = [ instance2.to_file(), repair_options_prg ]
+    solver      = GringoClasp()
+    models      = solver.run(prg)
     os.unlink(prg[0])    
     return models[0]
     
       
 def get_repair_options_make_obs_input(instance):
     repair_mode = String2TermSet('repair_i')
-    instance2 = TermSet(instance.union(repair_mode))
-    prg = [ instance2.to_file(), repair_options_prg ]
-    solver = GringoClasp()
-    models = solver.run(prg)
+    instance2   = TermSet(instance.union(repair_mode))
+    prg         = [ instance2.to_file(), repair_options_prg ]
+    solver      = GringoClasp()
+    models      = solver.run(prg)
     os.unlink(prg[0])    
     return models[0]
     
 def get_repair_options_add_edges(instance):
     repair_mode = String2TermSet('repair_a')
-    instance2 = TermSet(instance.union(repair_mode))
-    prg = [ instance2.to_file(), repair_options_prg ]
-    solver = GringoClasp()
-    models = solver.run(prg)
+    instance2   = TermSet(instance.union(repair_mode))
+    prg         = [ instance2.to_file(), repair_options_prg ]
+    solver      = GringoClasp()
+    models      = solver.run(prg)
     os.unlink(prg[0])    
     return models[0]
 
@@ -150,11 +150,10 @@ def get_repair_options_add_edges(instance):
 def get_minimum_of_repairs(instance,repair_options,exclude=[]):
     #inputs = get_reductions(instance)
     #instance2 = instance.union(inputs)
-    inst = instance.to_file()
-    repops = repair_options.to_file()
-    prg = [ inst, repops, exclude_sol(exclude), repair_core_prg, repair_cardinality_prg ]
-
-    solver = GringoClasp()
+    inst    = instance.to_file()
+    repops  = repair_options.to_file()
+    prg     = [ inst, repops, exclude_sol(exclude), repair_core_prg, repair_cardinality_prg ]
+    solver  = GringoClasp()
     optimum = solver.run(prg)
     os.unlink(inst)
     os.unlink(repops)
@@ -163,15 +162,12 @@ def get_minimum_of_repairs(instance,repair_options,exclude=[]):
 
 
 def get_minimal_repair_sets(instance, repair_options ,optimum,nmodels=0,exclude=[]):
-    #inputs = get_reductions(instance)
-    #instance2 = instance.union(inputs)
-    inst = instance.to_file()
-    repops = repair_options.to_file()
-    prg = [ inst, repops, exclude_sol(exclude), repair_core_prg, repair_cardinality_prg ]
-
-    options='--project --opt-mode=optN '+str(nmodels)
-    solver = GringoClasp(clasp_options=options)
-    models = solver.run(prg, collapseTerms=True, collapseAtoms=False)
+    inst    = instance.to_file()
+    repops  = repair_options.to_file()
+    prg     = [ inst, repops, exclude_sol(exclude), repair_core_prg, repair_cardinality_prg ]
+    options = '--project --opt-mode=optN '+str(nmodels)
+    solver  = GringoClasp(clasp_options=options)
+    models  = solver.run(prg, collapseTerms=True, collapseAtoms=False)
     os.unlink(inst)
     os.unlink(repops)
     os.unlink(prg[2])
@@ -184,15 +180,12 @@ def get_predictions_under_minimal_repair(instance, repair_options, optimum):
     derived from [instance], minus those that are a direct consequence
     of obs_[ev]label predicates
     '''
-    #inputs = get_reductions(instance)
-    #instance2 = instance.union(inputs)
-    inst = instance.to_file()
-    repops = repair_options.to_file()    
-    prg = [ inst, repops, prediction_core_prg, repair_cardinality_prg ]
-
-    options='--project --enum-mode cautious --opt-mode=optN --opt-bound='+str(optimum)
-    solver = GringoClasp(clasp_options=options)
-    models = solver.run(prg, collapseTerms=True, collapseAtoms=False)
+    inst    = instance.to_file()
+    repops  = repair_options.to_file()    
+    prg     = [ inst, repops, prediction_core_prg, repair_cardinality_prg ]
+    options = '--project --enum-mode cautious --opt-mode=optN --opt-bound='+str(optimum)
+    solver  = GringoClasp(clasp_options=options)
+    models  = solver.run(prg, collapseTerms=True, collapseAtoms=False)
     os.unlink(inst)
     os.unlink(repops)
     return whatsnew(instance,models[0])
@@ -226,9 +219,8 @@ def get_predictions_under_consistency(instance):
     derived from [instance], minus those that are a direct consequence
     of obs_[ev]label predicates
     '''
-    #inputs = get_reductions(instance)
-    inst = instance.to_file()
-    prg = [ prediction_prg, inst, exclude_sol([]) ]
+    inst   = instance.to_file()
+    prg    = [ prediction_prg, inst, exclude_sol([]) ]
     solver = GringoClasp(clasp_options='--project --enum-mode cautious')
     models = solver.run(prg, collapseTerms=True, collapseAtoms=False)
     os.unlink(inst)
