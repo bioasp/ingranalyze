@@ -40,8 +40,7 @@ For more options you can ask for help as follows::
 Samples
 =======
 
-Sample files for yeast are available here::
-      yeast_guelzim.net_ yeast_snf2.obs_
+Sample files for yeast are available here: yeast_guelzim.net_ and yeast_snf2.obs_
 
 .. _yeast_guelzim.net: http://bioasp.github.io/downloads/samples/yeastdata/yeast_guelzim.net
 .. _yeast_snf2.obs: http://bioasp.github.io/downloads/samples/yeastdata/yeast_snf2.obs
