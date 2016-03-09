@@ -33,13 +33,14 @@ def print_predictions(predictions) :
     if p.pred() == "elabel" :
       if p.arg(2) == "-1" : print('  ',str(p.arg(0)),'->',str(p.arg(1)),'-')
       if p.arg(2) == "1"  : print('  ',str(p.arg(0)),'->',str(p.arg(1)),'+')
-                  
+
+
 def print_mic(mic, net, obs):
 
   nodes = []
   edges = []
   for node in mic: nodes.append(str(node.arg(1)))
-  
+
   predecessors = []
   for e in net:
     if e.pred() == "obs_elabel" :
@@ -52,14 +53,14 @@ def print_mic(mic, net, obs):
       #TODO ? edges
   for edge in edges: print('  ',edge)
   for o in obs:
-    if o.pred() == "obs_vlabel" :  
+    if o.pred() == "obs_vlabel" :
        if str(o.arg(1)) in nodes :
          if str(o.arg(2))=="1"  :  print('  ',str(o.arg(1)), "= +")
          if str(o.arg(2))=="-1" :  print('  ',str(o.arg(1)), "= -")
        if str(o.arg(1)) in predecessors :
          if str(o.arg(2))=="1"  :  print('  ',str(o.arg(1)), "= +")
          if str(o.arg(2))=="-1" :  print('  ',str(o.arg(1)), "= -")
-  
+
 
 def clean_up() :
   if os.path.isfile("parser.out")                : os.remove("parser.out")
@@ -72,6 +73,6 @@ def clean_up() :
   if os.path.isfile("graph_parser_parsetab.py")  : os.remove("graph_parser_parsetab.py")
   if os.path.isfile("graph_parser_parsetab.pyc") : os.remove("graph_parser_parsetab.pyc")
 
-def m_quit() :  
+def m_quit() :
   clean_up()
   quit()

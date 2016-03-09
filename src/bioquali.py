@@ -29,8 +29,6 @@ import __ingranalyze__.sif_parser as sif_parser
 def int_of_sign(s):
     if s == '+': return '1'
     elif s == '-': return '-1'
-    elif s == '0': return '0'
-    elif s == 'nc': return '0'
     else:
         print(s)
         assert(False)
@@ -38,18 +36,12 @@ def int_of_sign(s):
 def sign_of_int(s):
     if s == '1': return '+'
     elif s == '-1': return '-'
-    elif s == '0': return '0'
+
     else:
         print(s)
         assert(False)
 
 
-
-GENE_ID = '[-a-zA-Z0-9_:&\(\)/]+'
-
-#tokens = ( 'COMPLEX', 'INFL', 'SIGN', 'GENE',)
-#t_GENE = r'[a-zA-Z_][a-zA-Z0-9_]*'
-#operator = ['&','|']
 
 def readGraph(filename):
     p = graph_parser.Parser()
@@ -120,7 +112,7 @@ def saveGraph(termset,filename):
 def readProfile(filename):
     file        = open(filename,'r')
     GENE_ID     = '[-a-zA-Z0-9_:\(\)/]+'
-    SIGN        = '[-+0n]c*'
+    SIGN        = '[-+n]c*'
     val_re      = '(?P<genid>'+GENE_ID+')( )*=( )*(?P<sign>'+SIGN+')'
     val         = re.compile(val_re)
     name_re     = '(-\*-)( )*(?P<name>\S+)( )*(-\*-)'
@@ -141,48 +133,15 @@ def readProfile(filename):
     while line:
         vm = val.match(line)
         if vm:
-            vertex = quote(vm.group('genid'))
-            accu.add(Term('obs_vlabel',[name, "gen("+vertex+")", int_of_sign(vm.group('sign'))]))
+            if vm.group('sign') != "nc":
+                vertex = quote(vm.group('genid'))
+                accu.add(Term('obs_vlabel',[name, "gen("+vertex+")", int_of_sign(vm.group('sign'))]))
         else:
             print('Syntax error line:', line_number,' ',line)
         line = file.readline()[:-1]
         line_number+=1
     return accu
 
-def readProfile_with_nc(filename):
-
-    file        = open(filename,'r')
-    GENE_ID     = '[-a-zA-Z0-9_:\(\)/]+'
-    val_re      = '(?P<genid>'+GENE_ID+')( )*=( )*(?P<sign>[-+0n]c*)( )*(?P<input>\(input\))*'
-    val         = re.compile(val_re)
-    name_re     = '(-\*-)( )*(?P<name>\S+)( )*(-\*-)'
-    name        = re.compile(name_re)
-    obs_name    = None
-    line_number = 1
-    line        = file.readline()[:-1]
-    nm          = name.match(line) # the first line may contain the name
-    if nm:
-        name = nm.group('name')
-        line = file.readline()[:-1]
-    else:
-        name = filename
-    name = quote(name)
-    accu = TermSet()
-    accu.add(Term('exp',[name]))
-    # ordinary line
-    while line:
-        vm = val.match(line)
-        if vm:
-            vertex = quote(vm.group('genid'))
-
-            accu.add(Term('obs_vlabel',[name, "gen("+vertex+")", int_of_sign(vm.group('sign'))]))
-            if vm.group('input')!=None :
-              accu.add(Term('input',[name, "gen("+vertex+")"]))
-        else:
-            print('Syntax error line:', line_number,' ',line)
-        line = file.readline()[:-1]
-        line_number+=1
-    return accu
 
 def saveProfile(termset,condition,filename):
     file = open(filename, 'w')

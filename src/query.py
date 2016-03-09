@@ -43,7 +43,7 @@ def is_consistent(instance):
     to the system described by the TermSet object [instance].
     '''
     return get_consistent_labelings(instance,1) != []
-    
+
 
 def get_consistent_labelings(instance,nmodels=0,exclude=[]):
     '''
@@ -62,8 +62,8 @@ def get_consistent_labelings(instance,nmodels=0,exclude=[]):
     os.unlink(inst)
     os.unlink(prg[2])
     return models
-   
-    
+
+
 def get_minimal_inconsistent_cores(instance,nmodels=0,exclude=[]):
     '''
     [compute_mic(instance,nmodels,exclude)] returns a list containing
@@ -105,9 +105,9 @@ def get_repair_options_flip_obs(instance):
     prg         = [ instance2.to_file(), repair_options_prg ]
     solver      = GringoClasp()
     models      = solver.run(prg)
-    os.unlink(prg[0])    
+    os.unlink(prg[0])
     return models[0]
-    
+
 
 def get_repair_options_flip_edge(instance):
     repair_mode = String2TermSet('repair_e')
@@ -124,19 +124,19 @@ def get_repair_options_make_node_input(instance):
     prg         = [ instance2.to_file(), repair_options_prg ]
     solver      = GringoClasp()
     models      = solver.run(prg)
-    os.unlink(prg[0])    
+    os.unlink(prg[0])
     return models[0]
-    
-      
+
+
 def get_repair_options_make_obs_input(instance):
     repair_mode = String2TermSet('repair_i')
     instance2   = TermSet(instance.union(repair_mode))
     prg         = [ instance2.to_file(), repair_options_prg ]
     solver      = GringoClasp()
     models      = solver.run(prg)
-    os.unlink(prg[0])    
+    os.unlink(prg[0])
     return models[0]
-    
+
 def get_repair_options_add_edges(instance):
     repair_mode = String2TermSet('repair_a')
     instance2   = TermSet(instance.union(repair_mode))
@@ -172,8 +172,8 @@ def get_minimal_repair_sets(instance, repair_options ,optimum,nmodels=0,exclude=
     os.unlink(repops)
     os.unlink(prg[2])
     return models
-    
-     
+
+
 def get_predictions_under_minimal_repair(instance, repair_options, optimum):
     '''
     Computes the set of signs on edges/vertices that can be cautiously
@@ -226,4 +226,4 @@ def get_predictions_under_consistency(instance):
     os.unlink(inst)
     os.unlink(prg[2])
     return whatsnew(instance,models[0])
-    
+

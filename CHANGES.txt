@@ -1,3 +1,8 @@
+1.5.5
+-----
+remove ability to parse 0 obseravation
+cleanup, remove the parsing code for complex regulations
+
 1.5.4
 -----
 port to python 3

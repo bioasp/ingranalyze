@@ -17,10 +17,10 @@
 # -*- coding: utf-8 -*-
 from setuptools import setup
 
-                         
+
 setup(
   name             = 'ingranalyze',
-  version          = '1.5.4',
+  version          = '1.5.5',
   url              = 'http://bioasp.github.io/ingranalyze/',
   license          = 'GPLv3+',
   description      = 'Influence graph analysis, consistency check, diagnosis, repair and prediction.',
