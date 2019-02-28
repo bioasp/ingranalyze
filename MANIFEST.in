@@ -1,4 +1,4 @@
 include src/encodings/*.lp
 include src/encodings/*.gringo
 include CHANGES.txt
-include README.rst
+include README.md
