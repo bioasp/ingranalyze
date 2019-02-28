@@ -15,16 +15,20 @@
 # You should have received a copy of the GNU General Public License
 # along with ingranalyze.  If not, see <http://www.gnu.org/licenses/>.
 # -*- coding: utf-8 -*-
+
 from setuptools import setup
 
+with open("README.md", "r") as fh:
+    long_description = fh.read()
 
 setup(
   name             = 'ingranalyze',
-  version          = '1.5.6',
+  version          = '0.0.1',
   url              = 'http://bioasp.github.io/ingranalyze/',
   license          = 'GPLv3+',
   description      = 'Influence graph analysis, consistency check, diagnosis, repair and prediction.',
-  long_description = open('README.md').read(),
+  long_description = long_description,
+  long_description_content_type="text/markdown",
   author           = 'Sven Thiele',
   author_email     = 'sthiele78@gmail.com',
   packages         = ['__ingranalyze__'],
