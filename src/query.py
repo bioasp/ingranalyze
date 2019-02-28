@@ -17,8 +17,9 @@
 
 # -*- coding: utf-8 -*-
 import os
-import tempfile
 from pyasp.asp import *
+from pyasp.term import String2TermSet;
+from pyasp.misc import *
 
 root = __file__.rsplit('/', 1)[0]
 
@@ -73,7 +74,7 @@ def get_minimal_inconsistent_cores(instance,nmodels=0,exclude=[]):
     then the list contain all feasible models.
     '''
     inputs  = get_reductions(instance)
-    prg     = [ dyn_mic_prg, inputs.to_file(), instance.to_file(), exclude_sol(exclude) ] 
+    prg     = [ dyn_mic_prg, inputs.to_file(), instance.to_file(), exclude_sol(exclude) ]
     options ='--heuristic=Vmtf '+str(nmodels)
     solver  = GringoClasp(clasp_options=options)
     models  = solver.run(prg, collapseTerms=True, collapseAtoms=False)
@@ -115,7 +116,7 @@ def get_repair_options_flip_edge(instance):
     prg         = [ instance2.to_file(), repair_options_prg ]
     solver      = GringoClasp()
     models      = solver.run(prg)
-    os.unlink(prg[0])    
+    os.unlink(prg[0])
     return models[0]
 
 def get_repair_options_make_node_input(instance):
@@ -143,7 +144,7 @@ def get_repair_options_add_edges(instance):
     prg         = [ instance2.to_file(), repair_options_prg ]
     solver      = GringoClasp()
     models      = solver.run(prg)
-    os.unlink(prg[0])    
+    os.unlink(prg[0])
     return models[0]
 
 
@@ -157,7 +158,7 @@ def get_minimum_of_repairs(instance,repair_options,exclude=[]):
     optimum = solver.run(prg)
     os.unlink(inst)
     os.unlink(repops)
-    os.unlink(prg[2]) 
+    os.unlink(prg[2])
     return optimum[0]
 
 
@@ -181,7 +182,7 @@ def get_predictions_under_minimal_repair(instance, repair_options, optimum):
     of obs_[ev]label predicates
     '''
     inst    = instance.to_file()
-    repops  = repair_options.to_file()    
+    repops  = repair_options.to_file()
     prg     = [ inst, repops, prediction_core_prg, repair_cardinality_prg ]
     options = '--project --enum-mode cautious --opt-mode=optN --opt-bound='+str(optimum)
     solver  = GringoClasp(clasp_options=options)

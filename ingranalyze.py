@@ -44,19 +44,19 @@ if __name__ == '__main__':
     net_string = args.networkfile
     obs_string = args.observationfile
 
-    print('\nReading network',net_string, '...',end='')
+    print('\nReading network',net_string, '... ',end='')
     net = bioquali.readGraph(net_string)
     print('done.')
     #net.to_file("net.lp")
 
-    print('\nReading observations',obs_string, '...',end='')
+    print('\nReading observations',obs_string, '... ',end='')
     mu = bioquali.readProfile(obs_string)
     print('done.')
     print('\nComputing input nodes ...',end='')
     inputs = query.guess_inputs(net)
     print('done.')
 
-    print('\nTesting empty network for consistency ...',end='')
+    print('\nTesting empty network for consistency ... ',end='')
     consistent = query.is_consistent(net)
     print('done.')
 
@@ -65,7 +65,7 @@ if __name__ == '__main__':
       print('   The empty network is inconsistent.')
 
       empty_net = TermSet(net.union(inputs))
-      print('\nTesting empty network plus input nodes for consistency ...',end='')
+      print('\nTesting empty network plus input nodes for consistency ... ',end='')
       consistent = query.is_consistent(empty_net)
       print('done.')
       if consistent: print('   The empty network is consistent.')
@@ -73,7 +73,7 @@ if __name__ == '__main__':
         print('   The empty network is still inconsistent.')
 
         if args.mics:
-          print('\nComputing minimal inconsistent cores (mic\'s) ...',end='')
+          print('\nComputing minimal inconsistent cores (mic\'s) ... ',end='')
           mics = query.get_minimal_inconsistent_cores(empty_net)
           print('done.\n')
           count  = 1
@@ -86,30 +86,30 @@ if __name__ == '__main__':
                 oldmic = mic
 
         repair_options= TermSet()
-        print('\nCompute repair options ...',end='')
+        print('\nCompute repair options, ',end='')
         if args.repair==1:
-          print('repair mode: flip observed variations ...',end='')
+          print('repair mode: flip observed variations ... ',end='')
           repair_options = query.get_repair_options_flip_obs(empty_net)
           print('done.')
         if args.repair==2:
-          print('repair mode: flip influences ...',end='')
+          print('repair mode: flip influences ... ',end='')
           repair_options = query.get_repair_options_flip_edge(empty_net)
           print('done.')
         if args.repair==3:
-          print('repair mode: define network nodes as inputs ...',end='')
+          print('repair mode: define network nodes as inputs ... ',end='')
           repair_options = query.get_repair_options_make_node_input(empty_net)
           print('done.')
         if args.repair==4:
-          print('repair mode: define network nodes as input in an experiment ...',end='')
+          print('repair mode: define network nodes as input in an experiment ... ',end='')
           repair_options = query.get_repair_options_make_obs_input(empty_net)
           print('done.')
         if args.repair==5:
-          print('repair mode: add influence ...',end='')
+          print('repair mode: add influence ... ',end='')
           repair_options = query.get_repair_options_add_edges(empty_net)
           print('done.')
 
 
-        print('\nCompute minimal numbers of necessary repair operations ...',end='')
+        print('\nCompute minimal numbers of necessary repair operations ... ',end='')
         optimum = query.get_minimum_of_repairs(empty_net,repair_options)
         print('done.')
 
@@ -118,7 +118,7 @@ if __name__ == '__main__':
         do_repair= raw_input('\nDo you want to compute all possible repair sets? Y/n:')
         if do_repair=="Y":
 
-          print('\nComputing all repair sets with size', optimum[0],'...',end='')
+          print('\nComputing all repair sets with size', optimum[0],'... ',end='')
           models = query.get_minimal_repair_sets(empty_net,repair_options,optimum[0])
           print('done.')
 
@@ -133,7 +133,7 @@ if __name__ == '__main__':
               print(' ')
               count+=1
 
-        print('\nComputing predictions that hold under all repair sets size', optimum[0],'...',end='')
+        print('\nComputing predictions that hold under all repair sets size', optimum[0],'... ',end='')
         model = query.get_predictions_under_minimal_repair(optimum[0],empty_net,repair_options)
         print('done.')
         predictions = model.to_list()
@@ -142,13 +142,13 @@ if __name__ == '__main__':
 
     if consistent: #if network is consistent add data
       net_with_data = TermSet(net.union(mu).union(inputs))
-      print('\nTesting network with data for consistency ...',end='')
+      print('\nTesting network with data for consistency ... ',end='')
       consistent = query.is_consistent(net_with_data)
       print("done.")
       if consistent:
         print('   The network and data are consistent.')
 
-        print('\nComputing predictions under consistency ...',end='')
+        print('\nComputing predictions under consistency ... ',end='')
         model = query.get_predictions_under_consistency(net_with_data)
         print('done.')
         predictions = model.to_list()
@@ -161,7 +161,7 @@ if __name__ == '__main__':
         print('   The network and the data are inconsistent.')
 
         if args.mics:
-          print('\nComputing minimal inconsistent cores (mic\'s) ...',end='')
+          print('\nComputing minimal inconsistent cores (mic\'s) ... ',end='')
           mics = query.get_minimal_inconsistent_cores(net_with_data)
           print('done.')
           count  = 1
@@ -175,29 +175,29 @@ if __name__ == '__main__':
 
 
         repair_options= TermSet()
-        print('\nCompute repair options ...',end='')
+        print('\nCompute repair options, ',end='')
         if args.repair==1:
-          print('repair mode: flip observed variations ...',end='')
+          print('repair mode: flip observed variations ... ',end='')
           repair_options = query.get_repair_options_flip_obs(net_with_data)
           print('done.')
         if args.repair==2:
-          print('repair mode: flip influences ...',end='')
+          print('repair mode: flip influences ... ',end='')
           repair_options = query.get_repair_options_flip_edge(net_with_data)
           print('done.')
         if args.repair==3:
-          print('repair mode: define network nodes as inputs ...',end='')
+          print('repair mode: define network nodes as inputs ... ',end='')
           repair_options = query.get_repair_options_make_node_input(net_with_data)
           print('done.')
         if args.repair==4:
-          print('repair mode: define network nodes as input in an experiment ...',end='')
+          print('repair mode: define network nodes as input in an experiment ... ',end='')
           repair_options = query.get_repair_options_make_obs_input(net_with_data)
           print('done.')
         if args.repair==5:
-          print('repair mode: add influence ...',end='')
+          print('repair mode: add influence ... ',end='')
           repair_options = query.get_repair_options_add_edges(net_with_data)
           print('done.')
 
-        print('\nCompute minimal numbers of necessary repair operations ...',end='')
+        print('\nCompute minimal numbers of necessary repair operations ... ',end='')
         optimum = query.get_minimum_of_repairs(net_with_data, repair_options)
         print('done.')
 
@@ -205,7 +205,7 @@ if __name__ == '__main__':
 
         if args.list_repairs:
 
-          print('\nComputing all repair sets with size', optimum.score[0],'...',end='')
+          print('\nComputing all repair sets with size ', optimum.score[0],' ... ',end='')
           models = query.get_minimal_repair_sets(net_with_data, repair_options, optimum.score[0])
           print("done.")
           count    = 1
@@ -222,7 +222,7 @@ if __name__ == '__main__':
         #print('Computing subset minimal repairs ...'
         #print('\n', query.subset_minimal_repair_flip_obs(net_with_data)
 
-        print('\nComputing predictions that hold under all repair sets size', optimum.score[0],'...',end='')
+        print('\nComputing predictions that hold under all repair sets size ', optimum.score[0],' ... ',end='')
         model = query.get_predictions_under_minimal_repair(net_with_data, repair_options, optimum.score[0])
         print("done.")
         predictions = model.to_list()

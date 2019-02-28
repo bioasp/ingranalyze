@@ -20,7 +20,7 @@ from setuptools import setup
 
 setup(
   name             = 'ingranalyze',
-  version          = '1.5.5',
+  version          = '1.5.6',
   url              = 'http://bioasp.github.io/ingranalyze/',
   license          = 'GPLv3+',
   description      = 'Influence graph analysis, consistency check, diagnosis, repair and prediction.',
@@ -31,5 +31,5 @@ setup(
   package_dir      = {'__ingranalyze__' : 'src'},
   package_data     = {'__ingranalyze__' : ['encodings/*.lp','encodings/*.gringo']},
   scripts          = ['ingranalyze.py'],
-  install_requires = ['pyasp == 1.4.0']
+  install_requires = ['pyasp == 1.4.4']
 )
