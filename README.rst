@@ -3,7 +3,7 @@ Installation
 
 You can install ingranalyze by running::
 
-	$ pip install --user ingranalyze
+	$ pip3 install --user ingranalyze
 
 On Linux the executable script can then be found in ``~/.local/bin``
 
