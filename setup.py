@@ -24,7 +24,7 @@ setup(
   url              = 'http://bioasp.github.io/ingranalyze/',
   license          = 'GPLv3+',
   description      = 'Influence graph analysis, consistency check, diagnosis, repair and prediction.',
-  long_description = open('README.rst').read(),
+  long_description = open('README.md').read(),
   author           = 'Sven Thiele',
   author_email     = 'sthiele78@gmail.com',
   packages         = ['__ingranalyze__'],
