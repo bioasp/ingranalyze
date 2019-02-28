@@ -23,7 +23,7 @@ with open("README.md", "r") as fh:
 
 setup(
   name             = 'ingranalyze',
-  version          = '0.0.1',
+  version          = '1.5.6',
   url              = 'http://bioasp.github.io/ingranalyze/',
   license          = 'GPLv3+',
   description      = 'Influence graph analysis, consistency check, diagnosis, repair and prediction.',
