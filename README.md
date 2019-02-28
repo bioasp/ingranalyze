@@ -1,7 +1,6 @@
-Installation
-============
+# Installation
 
-You can install ingranalyze by running::
+You can install ingranalyze by running:
 
 	$ pip3 install --user ingranalyze
 
@@ -10,14 +9,13 @@ On Linux the executable script can then be found in ``~/.local/bin``
 and on MacOS the script is under ``/Users/YOURUSERNAME/Library/Python/3.2/bin``.
 
 
-Usage
-=====
+# Usage
 
-Typical usage is::
+Typical usage is:
 
 	$ ingranalyze.py --mics --repair 5 networkfile observationfile
 
-For more options you can ask for help as follows::
+For more options you can ask for help as follows:
 
 	$ ingranalyze.py -h 
 	usage: ingranalyze.py [-h] [--mics] [--repair {1,2,3,4,5}] [--list_repairs] networkfile observationfile                                                          
@@ -37,10 +35,9 @@ For more options you can ask for help as follows::
 	  --list_repairs        compute all minimal repair sets
 
 
-Samples
-=======
+# Samples
 
-Sample files for yeast are available here: yeast_guelzim.net_ and yeast_snf2.obs_
+Sample files for yeast are available here: [yeast_guelzim.net][1] and [yeast_snf2.obs][2]
 
-.. _yeast_guelzim.net: http://bioasp.github.io/downloads/samples/yeastdata/yeast_guelzim.net
-.. _yeast_snf2.obs: http://bioasp.github.io/downloads/samples/yeastdata/yeast_snf2.obs
+[1]: http://bioasp.github.io/downloads/samples/yeastdata/yeast_guelzim.net
+[2]: http://bioasp.github.io/downloads/samples/yeastdata/yeast_snf2.obs
