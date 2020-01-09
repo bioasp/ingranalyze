@@ -1,3 +1,4 @@
+[![PyPI version](https://img.shields.io/pypi/v/ingranalyze.svg)](https://pypi.org/project/ingranalyze/) 
 # Installation
 
 You can install ingranalyze by running:
