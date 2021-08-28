@@ -1,3 +1,8 @@
+# Warning
+
+**Ingranalyze is not maintained anymore. You might want to consider [Iggy](https://github.com/bioasp/iggy) as an alternatives for current work.**
+
+
 [![PyPI version](https://img.shields.io/pypi/v/ingranalyze.svg)](https://pypi.org/project/ingranalyze/) 
 # Installation
 
